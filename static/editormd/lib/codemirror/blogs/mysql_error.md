@@ -83,4 +83,4 @@ But there is still a question: I start my mysql server yesterday successful, why
 References:
 1. [Mysql配置文件/etc/my.cnf解析](https://www.jianshu.com/p/5f39c486561b)
 2. [CentOS 7下MySQL服务启动失败的解决思路](https://www.cnblogs.com/ivictor/p/5146247.html)
-3. [一次MySQL内存分配失败的解决](https://blog.csdn.net/foupwang/article/details/79431996)
+3. [一次MySQL内存分配失败的解决](https://blogDescription.csdn.net/foupwang/article/details/79431996)

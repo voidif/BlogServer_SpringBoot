@@ -7,5 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class ExchangeRate {
     private String currencyPairName;
-    private float rate;
+    private double rate;
 }

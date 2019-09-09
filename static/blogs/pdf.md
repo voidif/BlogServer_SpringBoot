@@ -17,4 +17,4 @@ head.append("Content-Type: application/pdf; charset=utf-8" + "\r\n");
 ```
 估计原因为，当未指定Content-Type头部栏时，浏览器有不同的编码。
 
-参考：[字符编码笔记：ASCII，Unicode 和 UTF-8](http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html)
+参考：[字符编码笔记：ASCII，Unicode 和 UTF-8](http://www.ruanyifeng.com/blogDescription/2007/10/ascii_unicode_and_utf-8.html)

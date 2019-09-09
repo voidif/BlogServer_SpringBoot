@@ -1,4 +1,4 @@
-package com.voidif.blogserver.tool;
+package com.voidif.blogserver.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.json.JsonParser;
@@ -11,11 +11,12 @@ import java.net.URL;
 import java.util.Map;
 
 @Slf4j
-public class ExchangeRateTool {
+public class ExchangeRateService {
     private static final String SERVER_URL_FORMAT = "http://free.currencyconverterapi.com/api/v5/convert?q=%s&compact=y&apiKey=1fc497b26127f4a176d8";
     private static final float INVALID_RATE = 0.0f;
+    private static final String VALUE_KEY = "val";
 
-    public static float getExchangeRateByCurrencyPairName(String currencyPairName) {
+    public static double getExchangeRateByCurrencyPairName(String currencyPairName) {
         return retrieveExchangeRateFromWeb(currencyPairName);
     }
 
@@ -24,11 +25,11 @@ public class ExchangeRateTool {
      * @param currencyPairName Currency pair name, example: "USD_CNY"
      * @return exchange rate as float
      */
-    private static float retrieveExchangeRateFromWeb(String currencyPairName) {
+    private static double retrieveExchangeRateFromWeb(String currencyPairName) {
         try {
             URL url = new URL(String.format(SERVER_URL_FORMAT, currencyPairName));
             String data = getDataFromURL(url);
-            float rate = parseExchangeRateFromString(data);
+            double rate = parseExchangeRateFromString(currencyPairName, data);
             return rate;
         } catch (IOException e) {
             log.error("Can not retrieve exchange rate from web. Error message: {}", e.getMessage());
@@ -46,11 +47,12 @@ public class ExchangeRateTool {
      * @param data
      * @return
      */
-    private static float parseExchangeRateFromString(String data) {
+    private static double parseExchangeRateFromString(String currencyPairName, String data) {
         JsonParser jsonParser = JsonParserFactory.getJsonParser();
-        Map<String, Object> map = jsonParser.parseMap(data);
-        //TODO
-        return 0.0f;
+        Map<String, Object> exchangeRate = jsonParser.parseMap(data);
+        Map rate = (Map)exchangeRate.get(currencyPairName);
+        Double rateValue = (Double)rate.get(VALUE_KEY);
+        return rateValue;
     }
 
     /**
@@ -69,7 +71,7 @@ public class ExchangeRateTool {
         } else {
             InputStream in = connection.getInputStream();
             byte[] data = in.readAllBytes();
-            return data.toString();
+            return new String(data);
         }
     }
 }
