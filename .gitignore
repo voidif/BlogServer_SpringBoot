@@ -31,4 +31,7 @@ build/
 .vscode/
 
 ### NPM Modules ###
-*/node_modules/*
+**/node_modules/**
+
+### React Converage ###
+**/react/coverage/**
