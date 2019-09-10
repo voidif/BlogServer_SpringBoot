@@ -17,5 +17,13 @@ module.exports = {
         use: [{ loader: 'babel-loader' }],
       }
     ]
-  }
+  },
+  resolve: {
+    modules: [
+        path.resolve("./src"),
+        path.resolve("./node_modules")
+    ],
+    extensions: [".js", ".jsx"]
+  },
+  mode: 'development'
 };
